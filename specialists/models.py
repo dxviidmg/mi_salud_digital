@@ -16,7 +16,7 @@ class ConsultingRoom(models.Model):
 	neighborhood = models.CharField(max_length=50)
 	city = models.CharField(max_length=50)
 	state = models.CharField(max_length=50)
-	zip_code = models.IntegerField(max_length=5)
+	zip_code = models.IntegerField()
 
 	def __str__(self) -> str:
 		return ', '.join([self.street_name + " " + self.street_number, self.neighborhood, self.city, self.state, str(self.zip_code)])
