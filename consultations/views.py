@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from .models import Consultation
+from rest_framework import viewsets
+from .serializers import ConsultationSerializer
 
-# Create your views here.
+class ConsultationViewSet(viewsets.ModelViewSet):
+    queryset = Consultation.objects.all()
+    serializer_class = ConsultationSerializer
