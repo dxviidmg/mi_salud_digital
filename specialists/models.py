@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Max, Min
 
 
 class Profile(models.Model):
@@ -32,7 +33,7 @@ class Availability(models.Model):
 		('Sunday', 'Sunday'),
 	]
 		
-	specialist = models.ForeignKey(User, on_delete=models.CASCADE)
+	specialist = models.ForeignKey(User, on_delete=models.CASCADE, related_name='availabilities')
 	consulting_room = models.ForeignKey(ConsultingRoom, on_delete=models.CASCADE)
 	start_time = models.TimeField()
 	end_time = models.TimeField()
@@ -40,3 +41,12 @@ class Availability(models.Model):
 
 	def __str__(self) -> str:
 		return '{} from {} to {}'.format(self.day, self.start_time, self.end_time)
+	
+
+
+def get_availability_time_range(self):
+	availabilities = self.availabilities.all()
+	return availabilities.aggregate(start_time=Min('start_time'), end_time=Max('end_time'))
+
+
+User.add_to_class("get_availability_time_range",get_availability_time_range)
