@@ -2,9 +2,11 @@ from rest_framework import serializers
 from .models import Consultation
 from datetime import timedelta
 from patients.serializers import PatientSerializer
+from specialists.serializers import ConsultingRoomSerializer
 
 class ConsultationSerializer(serializers.ModelSerializer):
     patient = PatientSerializer()
+    consulting_room = ConsultingRoomSerializer()
     
     date_time_end = serializers.SerializerMethodField()
 

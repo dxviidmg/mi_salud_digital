@@ -19,8 +19,14 @@ class ConsultingRoom(models.Model):
 	state = models.CharField(max_length=50)
 	zip_code = models.IntegerField()
 
-	def __str__(self) -> str:
+	def get_full_address(self):
 		return ', '.join([self.street_name + " " + self.street_number, self.neighborhood, self.city, self.state, str(self.zip_code)])
+	
+
+	def __str__(self) -> str:
+		return self.get_full_address()
+	
+
 
 class Availability(models.Model):
 	DAY_CHOICES = [

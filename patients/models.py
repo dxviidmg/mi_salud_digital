@@ -7,6 +7,7 @@ class Patient(models.Model):
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
 	second_last_name = models.CharField(max_length=30)
+	phone_number = models.CharField(max_length=10)
 
 	def get_full_name(self):
 			return '{} {} {}'.format(self.first_name, self.last_name, self.second_last_name)

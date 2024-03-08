@@ -6,5 +6,7 @@ from rest_framework import viewsets
 
 # Create your views here.
 class PatienViewSet(viewsets.ModelViewSet):
-    queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+    def get_queryset(self): 
+    	return Patient.objects.filter(specialist=self.request.user)
