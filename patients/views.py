@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .models import Patient
 from .serializers import PatientSerializer
 from rest_framework import viewsets
@@ -12,7 +11,7 @@ class PatienViewSet(viewsets.ModelViewSet):
 	serializer_class = PatientSerializer
 
 	def get_queryset(self): 
-		return Patient.objects.filter(specialist=self.request.user)
+		return Patient.objects.filter(specialist=self.request.user).order_by('first_name', 'last_name', 'second_last_name')
 	
 	def create(self, request, *args, **kwargs):
 		# Assuming you pass token in the request headers
